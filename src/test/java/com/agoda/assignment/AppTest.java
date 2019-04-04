@@ -12,6 +12,8 @@ public class AppTest extends BaseClass
         return new Object[][]{
                 {"A@quickbrown1fox3jump$over!", "1@Qu!ckBr0wnFoxJumpsOver"},// Valid Password
                 {"A@quickbrown1fox3jump$over!", "P@ck1myb#xw!thfivedzenjug$"},// Boundary Value : more than 4 special characters present
+                {"A@quickbrown1fox3jump$over!", "Pack1mybaxwathfivedazenjug$"},//Boundary Value : exactly 4 duplicate characters 4 'a'
+                {"A@quickbrown1fox3jump$over!", "P1a2r3r2o4t3i5$8b5i6r7d9"},//Boundary Value : exactly 50% password is number
         };
     }
 
@@ -23,6 +25,7 @@ public class AppTest extends BaseClass
                 {"A@quickbrown1fox3jump$over!", "PAck1mybAxwAthfivedAzenAjug$"},//Contains 5'A' : No duplicate characters more than 4 times, a and A are considered same in this case
                 {"A@quickbrown1fox3jump$over!", "P1ck1myb1xw1thfived1zenajug$"},//Contains 5'1' : No duplicate characters more than 4 times, a and A are considered same in this case
                 {"A@quickbrown1fox3jump$over!", "P@ck1myb#xw!thfived&zenjug$"},//more than 4 special characters present
+                {"A@quickbrown1fox3jump$over!", "P1232b435f567e89100382n7$"},//more than 50% password is number
         };
     }
 

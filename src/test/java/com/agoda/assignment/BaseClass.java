@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 public class BaseClass {
 
     protected Boolean ChangePassword(String oldPassword, String newPassword) {
-        Boolean flag1, flag2, flag3;
+        Boolean flag1, flag2, flag3, flag4;
 
         flag1 = checkRegex(oldPassword,newPassword);
         flag2 = checkIfCharacterFrequencyGreaterThan4(newPassword);
         flag3 = checkIfSpecialCharacterFrequencyGreaterThan4(newPassword);
+        flag4 = checkIfNumbersCoverMoreThanFiftyPercentOfPassword(newPassword);
 
-        return flag1 && flag2 && flag3;
+        return flag1 && flag2 && flag3 && flag4;
     };
 
 
@@ -77,6 +78,14 @@ public class BaseClass {
      */
     protected Boolean checkIfSpecialCharacterFrequencyGreaterThan4(String password){
         return (password.chars().filter(ch-> "!@#$&*".indexOf(ch)>-1).count() > 4) ? false:true;
+    }
+
+    /*
+     * Purpose: Checks count of digits <= 50% of entire password to return true else false
+     *
+     */
+    protected Boolean checkIfNumbersCoverMoreThanFiftyPercentOfPassword(String password){
+        return (password.chars().filter(ch-> "0123456789".indexOf(ch)>-1).count() > password.length()/2 ) ? false:true;
     }
 
 
