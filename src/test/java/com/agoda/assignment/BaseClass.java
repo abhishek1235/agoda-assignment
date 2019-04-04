@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 public class BaseClass {
 
     protected Boolean ChangePassword(String oldPassword, String newPassword) {
-        Boolean flag1, flag2;
+        Boolean flag1, flag2, flag3;
 
         flag1 = checkRegex(oldPassword,newPassword);
         flag2 = checkIfCharacterFrequencyGreaterThan4(newPassword);
+        flag3 = checkIfSpecialCharacterFrequencyGreaterThan4(newPassword);
 
-        return flag1 && flag2;
+        return flag1 && flag2 && flag3;
     };
 
 
@@ -67,6 +68,15 @@ public class BaseClass {
      */
     protected Boolean checkIfCharacterFrequencyGreaterThan4(String password){
         return (getFrequencyIgnoringCase(password).values().stream().filter(v ->v>4).count()>0) ? false:true;
+    }
+
+
+    /*
+     * Purpose: Checks if special character frequency <= to return true else false
+     *
+     */
+    protected Boolean checkIfSpecialCharacterFrequencyGreaterThan4(String password){
+        return (password.chars().filter(ch-> "!@#$&*".indexOf(ch)>-1).count() > 4) ? false:true;
     }
 
 

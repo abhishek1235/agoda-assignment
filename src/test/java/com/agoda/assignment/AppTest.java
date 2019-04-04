@@ -11,6 +11,7 @@ public class AppTest extends BaseClass
     public static Object[][] credentials_Positive_Scenario() {
         return new Object[][]{
                 {"A@quickbrown1fox3jump$over!", "1@Qu!ckBr0wnFoxJumpsOver"},// Valid Password
+                {"A@quickbrown1fox3jump$over!", "P@ck1myb#xw!thfivedzenjug$"},// Boundary Value : more than 4 special characters present
         };
     }
 
@@ -21,6 +22,7 @@ public class AppTest extends BaseClass
                 {"A@quickbrown1fox3jump$over!", "Pack1mybaxwathfivedazenajug$"},//Contains 5'a' : No duplicate characters more than 4 times, a and A are considered same in this case
                 {"A@quickbrown1fox3jump$over!", "PAck1mybAxwAthfivedAzenAjug$"},//Contains 5'A' : No duplicate characters more than 4 times, a and A are considered same in this case
                 {"A@quickbrown1fox3jump$over!", "P1ck1myb1xw1thfived1zenajug$"},//Contains 5'1' : No duplicate characters more than 4 times, a and A are considered same in this case
+                {"A@quickbrown1fox3jump$over!", "P@ck1myb#xw!thfived&zenjug$"},//more than 4 special characters present
         };
     }
 
