@@ -26,6 +26,12 @@ public class AppTest extends BaseClass
                 {"A@quickbrown1fox3jump$over!", "P1ck1myb1xw1thfived1zenajug$"},//Contains 5'1' : No duplicate characters more than 4 times, a and A are considered same in this case
                 {"A@quickbrown1fox3jump$over!", "P@ck1myb#xw!thfived&zenjug$"},//more than 4 special characters present
                 {"A@quickbrown1fox3jump$over!", "P1232b435f567e89100382n7$"},//more than 50% password is number
+                {"A@quickbrown1fox3jump$over!", "A@quickbrown1fox3jump$over!"},//same password 100% match
+                {"A@quickbrown1fox3jump$over!", "A@quickbrown1fox3jump$over!lzy"},//new password is subset of old password so it is a 100% match
+                {"A@quickbrown1fox3jump$over!", "A@quickbrown1fox3jump$o"},// new password is subset of old password so it is a 100% match
+                {"A@quickbrown1fox3jump$over!", "A@quickbrown1fox3jump$olazy"},// new password is subset of old password so it is a 100% match
+                {"A@quickbrownfoxjump$over!", "A@qvickbrownflxjump$e123#Zdog"},// More than 80% match
+                {"A@quickbrownfoxjump$over!", "A@qvickbrownflxjump$e123#"},// Boundary Value : 80% match for new password
         };
     }
 

@@ -1,5 +1,6 @@
 package com.agoda.assignment;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,14 +9,15 @@ import java.util.stream.Collectors;
 public class BaseClass {
 
     protected Boolean ChangePassword(String oldPassword, String newPassword) {
-        Boolean flag1, flag2, flag3, flag4;
+        Boolean flag1, flag2, flag3, flag4, flag5;
 
         flag1 = checkRegex(oldPassword,newPassword);
         flag2 = checkIfCharacterFrequencyGreaterThan4(newPassword);
         flag3 = checkIfSpecialCharacterFrequencyGreaterThan4(newPassword);
         flag4 = checkIfNumbersCoverMoreThanFiftyPercentOfPassword(newPassword);
+        flag5 = checkPasswordMatchLessThanEightyPercent(oldPassword, newPassword);
 
-        return flag1 && flag2 && flag3 && flag4;
+        return flag1 && flag2 && flag3 && flag4&& flag5;
     };
 
 
@@ -87,6 +89,40 @@ public class BaseClass {
     protected Boolean checkIfNumbersCoverMoreThanFiftyPercentOfPassword(String password){
         return (password.chars().filter(ch-> "0123456789".indexOf(ch)>-1).count() > password.length()/2 ) ? false:true;
     }
+
+
+
+    /*
+     * Purpose: Returns the match percent of old and new password.
+     * The algorithm followed is : length of (A∩B)/Min length of (A,B).
+     * i.e. If new Password is a subset of old password then 100% match
+     *      If old Password is a subset of new password then 100% match
+     *      If new Password contains some part of old password or vice-versa then it is calculated as:  Length of (A∩B)/Min length of (A,B)
+     *
+     */
+    protected Boolean checkPasswordMatchLessThanEightyPercent(String oldPassword, String newPassword){
+        double shorter = Math.min(newPassword.length(),oldPassword.length());
+        HashMap<Character,Integer> longerPassword;
+        HashMap<Character,Integer> shorterPassword;
+        int count=0;
+        if(newPassword.length() > oldPassword.length()) {
+            longerPassword= (HashMap<Character, Integer>) getFrequency(newPassword);
+            shorterPassword= (HashMap<Character, Integer>) getFrequency(oldPassword);
+        }else{
+            longerPassword= (HashMap<Character, Integer>) getFrequency(oldPassword);
+            shorterPassword= (HashMap<Character, Integer>) getFrequency(newPassword);
+        }
+
+        for(Character ch: shorterPassword.keySet()){
+            if(longerPassword.containsKey(ch)){
+                count=count+ Math.min(shorterPassword.get(ch),shorterPassword.get(ch));
+            }
+        }
+        double matchPercent =(count/shorter)*100;
+        return matchPercent<80.0 ? true:false;
+
+    }
+
 
 
 }
