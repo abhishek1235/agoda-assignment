@@ -10,7 +10,7 @@ public class AppTest extends BaseClass
     @DataProvider(name = "Authentication")
     public static Object[][] credentials() {
         return new Object[][]{
-                {"OldPassword", "NewPassword"}
+                {"A@quickbrown1fox3jump$over!", "1@Qu!ckBr0wnFoxJumpsOver"},// Valid Password
         };
     }
 
@@ -26,7 +26,7 @@ public class AppTest extends BaseClass
         if(flag){
             Assert.assertTrue(ChangePassword(oldPassword,newPassword));
         }else{
-            Assert.fail("New Password Doesnot Match the expected criteria");
+            Assert.fail("New Password Doesn't Match the expected criteria");
         }
     }
 }
