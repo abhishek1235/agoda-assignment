@@ -1,0 +1,7 @@
+<suite name="Password Validation">
+    <test name="TestPassword">
+        <classes>
+            <class name="com.agoda.assignment.AppTest" />
+        </classes>
+    </test>
+</suite>

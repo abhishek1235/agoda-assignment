@@ -1,21 +1,16 @@
 package com.agoda.assignment;
 
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertTrue;
-
-/**
- * Unit test for simple App.
- */
+import org.testng.annotations.Test;
 
 public class AppTest
 {
     /**
-     * Rigorous Test :-)
+     * Testng Test
      */
+
     @Test
-    public void shouldAnswerWithTrue()
+    public void Test()
     {
-        assertTrue( true );
+        System.out.println("Hello World");
     }
 }
