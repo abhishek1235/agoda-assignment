@@ -17,6 +17,17 @@ public class BaseClass {
         flag4 = checkIfNumbersCoverMoreThanFiftyPercentOfPassword(newPassword);
         flag5 = checkPasswordMatchLessThanEightyPercent(oldPassword, newPassword);
 
+        if(!flag1)
+            System.out.println("The new Password should have at least 18 alphanumeric,1 Upper case, 1 lower case ,least 1 numeric, 1 special character from !@#$&*");
+        if(!flag2)
+            System.out.println("The new Password should not have duplicate characters more than 4 times");
+        if(!flag3)
+            System.out.println("The new Password should not have special characters more than 4 times");
+        if(!flag4)
+            System.out.println("The new Password should not have numbers more than 50% of the length");
+        if(!flag5)
+            System.out.println("The new Password should not match the old password by 80% or more");
+
         return flag1 && flag2 && flag3 && flag4&& flag5;
     };
 
