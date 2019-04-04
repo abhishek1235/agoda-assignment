@@ -2,7 +2,7 @@ package com.agoda.assignment;
 
 import org.testng.annotations.Test;
 
-public class AppTest
+public class AppTest extends BaseClass
 {
     /**
      * Testng Test
