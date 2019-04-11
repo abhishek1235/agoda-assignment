@@ -37,7 +37,7 @@ public class AppTest extends BaseClass
 
 
     /**
-     * Testng Test
+     * Positive Scenarios with True Assertion
      */
 
     @Test(priority=0,dataProvider = "ChangePassword_Positive_Scenario")
@@ -49,7 +49,7 @@ public class AppTest extends BaseClass
 
 
     /**
-     * Testng Test
+     * Negative Scenarios with True Assertion
      */
 
     @Test(priority=1,dataProvider = "ChangePassword_Negative_Scenario")

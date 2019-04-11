@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class BaseClass {
 
+    private final String NUMBERS="0123456789";
+    private final String SPECIALCHARS="!@#$&*";
+
     protected Boolean ChangePassword(String oldPassword, String newPassword) {
         Boolean flag1, flag2, flag3, flag4, flag5;
 
@@ -48,7 +51,7 @@ public class BaseClass {
 
     /*
      * Purpose: Returns a Map with set of characters as key and their occurrence as values values
-     *
+     * i.e. 'a' and 'A' are considered different
      */
     protected Map<Character, Integer> getFrequency(String str){
         return str.chars().boxed().collect(
@@ -63,7 +66,7 @@ public class BaseClass {
 
     /*
      * Purpose: Returns a Map with set of characters ignoring their case as key and their occurrence as values values
-     *
+     * i.e. 'a' and 'A' are considered same
      */
     protected Map<Character, Integer> getFrequencyIgnoringCase(String str){
         return str.toLowerCase().chars().boxed().collect(
@@ -81,7 +84,7 @@ public class BaseClass {
      *
      */
     protected Boolean checkIfCharacterFrequencyGreaterThan4(String password){
-        return (getFrequencyIgnoringCase(password).values().stream().filter(v ->v>4).count()>0) ? false:true;
+        return (getFrequencyIgnoringCase(password).values().stream().filter(v -> v > 4).count()>0) ? false:true;
     }
 
 
@@ -90,7 +93,7 @@ public class BaseClass {
      *
      */
     protected Boolean checkIfSpecialCharacterFrequencyGreaterThan4(String password){
-        return (password.chars().filter(ch-> "!@#$&*".indexOf(ch)>-1).count() > 4) ? false:true;
+        return (password.chars().filter(ch-> SPECIALCHARS.indexOf(ch)>-1).count() > 4) ? false:true;
     }
 
     /*
@@ -98,14 +101,15 @@ public class BaseClass {
      *
      */
     protected Boolean checkIfNumbersCoverMoreThanFiftyPercentOfPassword(String password){
-        return (password.chars().filter(ch-> "0123456789".indexOf(ch)>-1).count() > password.length()/2 ) ? false:true;
+        return (password.chars().filter(ch-> NUMBERS.indexOf(ch)>-1).count() > password.length()/2 ) ? false:true;
     }
 
 
 
     /*
-     * Purpose: Returns the match percent of old and new password.
-     * The algorithm followed is : length of (A∩B)/Min length of (A,B).
+     * Assumption : Since there is nothing mentioned about substring match considering character matching
+     * Purpose: Returns the match percent of old and new password based on characters. Here 'a' and 'A' are considered different
+     * The algorithm followed is : (length of (A∩B))/(Min length of (A,B)).
      * i.e. If new Password is a subset of old password then 100% match
      *      If old Password is a subset of new password then 100% match
      *      If new Password contains some part of old password or vice-versa then it is calculated as:  Length of (A∩B)/Min length of (A,B)
@@ -113,6 +117,7 @@ public class BaseClass {
      */
     protected Boolean checkPasswordMatchLessThanEightyPercent(String oldPassword, String newPassword){
         double shorter = Math.min(newPassword.length(),oldPassword.length());
+        double longer = Math.max(newPassword.length(),oldPassword.length());
         HashMap<Character,Integer> longerPassword;
         HashMap<Character,Integer> shorterPassword;
         int count=0;
@@ -126,7 +131,7 @@ public class BaseClass {
 
         for(Character ch: shorterPassword.keySet()){
             if(longerPassword.containsKey(ch)){
-                count=count+ Math.min(shorterPassword.get(ch),shorterPassword.get(ch));
+                count=count+ Math.min(longerPassword.get(ch),shorterPassword.get(ch));
             }
         }
         double matchPercent =(count/shorter)*100;
