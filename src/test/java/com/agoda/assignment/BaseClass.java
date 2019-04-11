@@ -10,31 +10,48 @@ public class BaseClass {
 
     private final String NUMBERS="0123456789";
     private final String SPECIALCHARS="!@#$&*";
+    private static String currentPassword="A@quickbrownf0xjump$over!";
 
     protected Boolean ChangePassword(String oldPassword, String newPassword) {
-        Boolean flag1, flag2, flag3, flag4, flag5;
+        Boolean flag1, flag2, flag3, flag4, flag5, flag6;
 
-        flag1 = checkRegex(oldPassword,newPassword);
-        flag2 = checkIfCharacterFrequencyGreaterThan4(newPassword);
-        flag3 = checkIfSpecialCharacterFrequencyGreaterThan4(newPassword);
-        flag4 = checkIfNumbersCoverMoreThanFiftyPercentOfPassword(newPassword);
-        flag5 = checkPasswordMatchLessThanEightyPercent(oldPassword, newPassword);
+        flag1 = checkOldPassword(oldPassword,newPassword);
+        flag2 = checkRegex(oldPassword,newPassword);
+        flag3 = checkIfCharacterFrequencyGreaterThan4(newPassword);
+        flag4 = checkIfSpecialCharacterFrequencyGreaterThan4(newPassword);
+        flag5 = checkIfNumbersCoverMoreThanFiftyPercentOfPassword(newPassword);
+        flag6 = checkPasswordMatchLessThanEightyPercent(oldPassword, newPassword);
 
         if(!flag1)
-            System.out.println("The new Password should have at least 18 alphanumeric,1 Upper case, 1 lower case ,least 1 numeric, 1 special character from !@#$&*");
+            System.out.println("ERROR: The old Password should match with the system password");
         if(!flag2)
-            System.out.println("The new Password should not have duplicate characters more than 4 times");
+            System.out.println("ERROR: The new Password should have at least 18 alphanumeric,1 Upper case, 1 lower case ,least 1 numeric, 1 special character from !@#$&*");
         if(!flag3)
-            System.out.println("The new Password should not have special characters more than 4 times");
+            System.out.println("ERROR: The new Password should not have duplicate characters more than 4 times");
         if(!flag4)
-            System.out.println("The new Password should not have numbers more than 50% of the length");
+            System.out.println("ERROR: The new Password should not have special characters more than 4 times");
         if(!flag5)
-            System.out.println("The new Password should not match the old password by 80% or more");
+            System.out.println("ERROR: The new Password should not have numbers more than 50% of the length");
+        if(!flag6)
+            System.out.println("ERROR: The new Password should not match the old password by 80% or more");
+        if(flag1 && flag2 && flag3 && flag4 && flag5&& flag6)
+            System.out.println("Password Changed Successfully !!");
 
-        return flag1 && flag2 && flag3 && flag4&& flag5;
+        return flag1 && flag2 && flag3 && flag4 && flag5&& flag6;
     };
 
 
+    /*
+     * Purpose: Checks for Old Password should match with the system
+     *
+     */
+    protected boolean checkOldPassword(String oldPassword,String newPassword){
+        if(currentPassword.contentEquals(oldPassword)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
     /*
@@ -135,6 +152,7 @@ public class BaseClass {
             }
         }
         double matchPercent =(count/shorter)*100;
+        System.out.println(matchPercent);
         return matchPercent<80.0 ? true:false;
 
     }
