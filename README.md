@@ -1,4 +1,4 @@
-#Agoda Assignment Setup Guide
+# Agoda Assignment Setup Guide
 This project demonstrates a basic Testng Maven framework project with Surefire Plugin integration. The functionality covered here is validation for password change with following conditions
 
 
